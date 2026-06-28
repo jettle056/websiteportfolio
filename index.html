@@ -29,6 +29,7 @@
     font-family:'Inter',sans-serif;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
+    cursor: none;
   }
   h1,h2,h3{font-family:'Space Grotesk',sans-serif;margin:0;letter-spacing:-0.01em;}
   .mono{font-family:'JetBrains Mono',monospace;}
@@ -292,9 +293,40 @@
   @media (prefers-reduced-motion: reduce){
     *{animation:none !important;transition:none !important;}
   }
+  /* ---------------- CUSTOM CURSOR ---------------- */
+
+body,
+a,
+button,
+.flip-card{
+    cursor:none;
+}
+
+#cursor{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:150px;
+    height:150px;
+
+    pointer-events:none;
+    z-index:99999;
+
+    transform:translate(-50%, -50%);
+}
+
+#cursor img{
+    width:100%;
+    height:100%;
+    display:block;
+}
 </style>
 </head>
 <body>
+  <div id="cursor">
+    <img src="assets/nct_lightstick.png" alt="lightstick">
+</div>
 
 <nav>
   <div class="navbar">
@@ -340,12 +372,14 @@
   <div class="wrap reveal">
     <div class="sec-head"><span class="sec-num mono">01</span><h2>About</h2></div>
     <p class="about-text">
-      I'm a <b>Computer Science major</b> at California State University, Fullerton, graduating May 2027.
-      By day, I'm an <b>IT Support Analyst II Intern</b> at the Metropolitan Water District of Southern California,
-      where I keep enterprise hardware running and end users unblocked. On my own time, I build things that blink,
-      beep, and occasionally crash — from a custom <b>Arduino chronograph</b> that measures projectile velocity to
-      leading a 9-person team on a <b>Unity-built game console project</b>. I'm comfortable across the stack:
-      Python and C/C++ for systems and embedded work, JavaScript/TypeScript and React for the web.
+      I'm a <b>Computer Science major</b> at California State University, Fullerton.
+      I’m interested in computers because of the creativity computer science offers and its ability to create meaningful change in the world 
+      (and because I enjoy figuring out why things don’t work the first time). 
+    </p>
+    <p class="about-text">
+      As a student, I'm always looking for opportunities to grow my technical skills, 
+      particularly in IT, where I can get hands-on experience diagnosing real problems, managing systems, 
+      and supporting the technology that keeps organizations running.
     </p>
   </div>
 </section>
@@ -353,7 +387,7 @@
 <section id="experience">
   <div class="wrap reveal">
     <div class="sec-head"><span class="sec-num mono">02</span><h2>Experience</h2></div>
-    <p class="fan-intro">My journey so far — click each card to flip it.</p>
+    <p class="fan-intro">My journey so far - click each "photocard" to flip it. (I LOVE NCT)</p>
 
     <div class="fan-wrap">
       <div class="card-fan">
@@ -363,7 +397,7 @@
   <div class="flip-inner">
     <div class="flip-front" style="--frame:var(--blue);">
       <div class="ft-icon">
-        <img src="ASSETS/mewtwo.png" alt="card art">
+        <img src="assets/doyoung.jpg" alt="card art">
       </div>
     </div>
     <div class="flip-back">
@@ -599,6 +633,43 @@
       card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
     });
   }
+const cursor = document.getElementById("cursor");
+
+let mouseX = 0;
+let mouseY = 0;
+
+let currentX = 0;
+let currentY = 0;
+
+document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+function animateCursor() {
+
+    currentX += (mouseX - currentX) * 0.15;
+    currentY += (mouseY - currentY) * 0.15;
+
+    cursor.style.left = currentX + "px";
+    cursor.style.top = currentY + "px";
+
+    requestAnimationFrame(animateCursor);
+}
+
+animateCursor();
+
+document.querySelectorAll("a, button, .flip-card").forEach(el => {
+
+    el.addEventListener("mouseenter", () => {
+        cursor.style.transform = "translate(-50%, -50%) scale(1.35)";
+    });
+
+    el.addEventListener("mouseleave", () => {
+        cursor.style.transform = "translate(-50%, -50%) scale(1)";
+    });
+
+});
 </script>
 
 </body>
