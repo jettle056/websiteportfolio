@@ -321,9 +321,26 @@
     height:100%;
     display:block;
 }
+
+#preloader{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .6s ease, visibility .6s ease;
+}
+#preloader.hide{opacity:0;visibility:hidden;pointer-events:none;}
+#preloader-text{
+  font-family:'JetBrains Mono',monospace;font-weight:600;
+  font-size:42px;color:var(--ink);
+  transition:opacity .25s ease;
+}
+body.loading{overflow:hidden;}
 </style>
 </head>
 <body>
+  <div id="preloader">
+  <span id="preloader-text">Hello</span>
+</div>
   <div id="cursor">
     <img src="assets/nct_lightstick.png" alt="lightstick">
 </div>
@@ -350,8 +367,8 @@
         <span style="animation-delay:.02s">Jett</span> <span style="animation-delay:.10s">Le</span>
       </h1>
       <p class="hero-role">
-        <b>Computer Science student</b> at Cal State Fullerton who likes taking things apart,
-        circuits, game engines, IT tickets, and putting them back together better.
+        <b>Computer Science student</b> at California State Univeristy, Fullerton who likes taking things apart,
+        circuits, game engines, IT tickets, and putting them back together better. Loves listening to NCT, boba, gym, night drives, endless food runs, and Fortnite. 
       </p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#projects">View Projects ↓</a>
@@ -601,6 +618,35 @@
 </footer>
 
 <script>
+document.body.classList.add('loading');
+const greetings = ['Hello','Hola','Bonjour','Ciao','Hallo','こんにちは', '你好','Xin chào','안녕하세요'];
+let gi = 0;
+const preloader = document.getElementById('preloader');
+const ptext = document.getElementById('preloader-text');
+
+const greetInterval = setInterval(() => {
+  ptext.style.opacity = 0;
+  setTimeout(() => {
+    gi++;
+    if (gi < greetings.length) {
+      ptext.textContent = greetings[gi];
+      ptext.style.opacity = 1;
+    }
+    if (gi === greetings.length - 1) {
+      clearInterval(greetInterval);
+      setTimeout(() => {
+        preloader.classList.add('hide');
+        document.body.classList.remove('loading');
+      }, 1000);
+    }
+  }, 250);
+}, 450);
+
+setTimeout(() => {
+  clearInterval(greetInterval);
+  preloader.classList.add('hide');
+  document.body.classList.remove('loading');
+}, greetings.length * 450 + 300);
   // Scroll reveal
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
@@ -673,6 +719,7 @@ if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
     // Hide the custom cursor on touch devices
     document.getElementById("cursor").style.display = "none";
 }
+
 </script>
 
 </body>
