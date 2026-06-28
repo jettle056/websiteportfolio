@@ -240,7 +240,7 @@
     box-shadow:0 14px 30px -14px rgba(24,24,27,0.35);
   }
   .flip-front{
-    border:6px solid var(--frame, var(--blue));
+    border:6px solid var(--frame, var());
     display:flex;flex-direction:column;align-items:center;
   }
   .ft-eyebrow{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:var(--ink-soft);align-self:flex-start;}
@@ -248,16 +248,33 @@
     position:absolute;top:10px;right:10px;font-family:'JetBrains Mono',monospace;font-size:10.5px;
     background:var(--frame,var(--blue));color:#fff;padding:3px 8px;border-radius:6px;font-weight:600;
   }
-.ft-icon{
-    flex:1;
-    overflow:hidden;
-    border-radius:10px;
+  .ft-photo{
+  flex:1;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  border-radius:8px;
 }
-
+.ft-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.ft-icon{flex:1;display:flex;align-items:center;justify-content:center;}
 .ft-icon img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.fb-logo img{
+  width:150%;
+  height:170%;
+  object-fit:contain;
+  border-radius:8px;
+  padding:4px;
+  display:block;
 }
   .ft-icon svg{width:78px;height:78px;}
   .ft-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;text-align:center;}
@@ -272,7 +289,7 @@
   }
   .fb-top{display:flex;gap:10px;align-items:flex-start;}
   .fb-logo{
-    width:30px;height:30px;border-radius:8px;background:var(--frame,var(--blue));color:#fff;
+    width:30px;height:30px;border-radius:8px;background:var(--frame,var());color:#fff;
     display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;
   }
   .fb-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14.5px;line-height:1.2;}
@@ -412,13 +429,13 @@ body.loading{overflow:hidden;}
 <div class="flip-card" style="--x:-90px; --y:8px; --rot:-7deg; z-index:1;">
   <div class="flip-inner">
     <div class="flip-front" style="--frame:var(--blue);">
-      <div class="ft-icon">
+      <div class="ft-photo">
         <img src="assets/doyoung.jpg" alt="card art">
       </div>
     </div>
     <div class="flip-back">
       <div class="fb-top">
-        <div class="fb-logo">MW</div>
+        <div class="fb-logo"><img src = "assets/Metropolitan_Water_District_Seal.jpg" alt="MWD logo"></div>
         <div>
           <div class="fb-title">IT Support Analyst II Student Intern</div>
           <div class="fb-sub">Metropolitan Water District of Southern California</div>
@@ -426,10 +443,6 @@ body.loading{overflow:hidden;}
       </div>
       <div class="fb-date">JUN 2026 — PRESENT · LOS ANGELES, CA</div>
       <ul>
-        <li>Resolved 40+ requests at a 95% first-response rate via ServiceNow.</li>
-        <li>Imaged &amp; configured Windows workstations using Tanium.</li>
-        <li>Replaced laptop batteries, fans &amp; components to extend device life.</li>
-        <li>Tracked 200+ IT assets through their full lifecycle.</li>
       </ul>
     </div>
   </div>
@@ -440,7 +453,7 @@ body.loading{overflow:hidden;}
         <div class="flip-card" style="--x:90px; --y:8px; --rot:7deg; z-index:2;">
           <div class="flip-inner">
             <div class="flip-front" style="--frame:#C9C2AE;">
-              <span class="ft-eyebrow">??? CARD</span>
+              <span class="ft-eyebrow"></span>
               <span class="ft-stat" style="background:#C9C2AE;">LOCKED</span>
               <div class="ft-icon">
                 <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
