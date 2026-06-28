@@ -295,13 +295,13 @@
   }
   /* ---------------- CUSTOM CURSOR ---------------- */
 
-body,
-a,
-button,
-.flip-card{
-    cursor:none;
+@media (hover: hover) and (pointer: fine) {
+  body,
+  a,
+  button,
+  .flip-card {
+  }
 }
-
 #cursor{
     position:fixed;
     top:0;
@@ -632,43 +632,47 @@ button,
       card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
     });
   }
-const cursor = document.getElementById("cursor");
+if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
 
-let mouseX = 0;
-let mouseY = 0;
+    const cursor = document.getElementById("cursor");
 
-let currentX = 0;
-let currentY = 0;
+    let mouseX = 0;
+    let mouseY = 0;
 
-document.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-});
+    let currentX = 0;
+    let currentY = 0;
 
-function animateCursor() {
+    document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
 
-    currentX += (mouseX - currentX) * 0.15;
-    currentY += (mouseY - currentY) * 0.15;
+    function animateCursor() {
+        currentX += (mouseX - currentX) * 0.15;
+        currentY += (mouseY - currentY) * 0.15;
 
-    cursor.style.left = currentX + "px";
-    cursor.style.top = currentY + "px";
+        cursor.style.left = currentX + "px";
+        cursor.style.top = currentY + "px";
 
-    requestAnimationFrame(animateCursor);
+        requestAnimationFrame(animateCursor);
+    }
+
+    animateCursor();
+
+    document.querySelectorAll("a, button, .flip-card").forEach(el => {
+        el.addEventListener("mouseenter", () => {
+            cursor.style.transform = "translate(-50%, -50%) scale(1.35)";
+        });
+
+        el.addEventListener("mouseleave", () => {
+            cursor.style.transform = "translate(-50%, -50%) scale(1)";
+        });
+    });
+
+} else {
+    // Hide the custom cursor on touch devices
+    document.getElementById("cursor").style.display = "none";
 }
-
-animateCursor();
-
-document.querySelectorAll("a, button, .flip-card").forEach(el => {
-
-    el.addEventListener("mouseenter", () => {
-        cursor.style.transform = "translate(-50%, -50%) scale(1.35)";
-    });
-
-    el.addEventListener("mouseleave", () => {
-        cursor.style.transform = "translate(-50%, -50%) scale(1)";
-    });
-
-});
 </script>
 
 </body>
